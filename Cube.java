@@ -1,13 +1,13 @@
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.InputStreamReader; 
-import java.util.*;
+
 public class Cube {  
   public static void main(final String[] args){
-  
-    //System.out.println("This is a Cube with Width and height ");
-    //This is mySystem.out.println("Hello World!");
+    //This cube is a three dimensional array. it is of data type char but that might change later.
+    //Maybe I need to declare the cube outside of main so that it is global? 
     char cube[][][] = new char[6][3][3];
+    //This is the key for which number to which color
     /*
       0 = White
       1 = Green
@@ -45,31 +45,29 @@ public class Cube {
         }
       }
     }
-
-    String input;
-    //Scanner for user input
-    Scanner sc = new Scanner(System.in);
-    //BufferedReader br = new BufferedReader();
-    
+ 
+    //Setting up the input from the user
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     char command = ' ';
+    int input;
     try {
-      while( command != "x"){
-       // System.out.print("Enter a move: ");
-       System.out.print();
-       input = System.console().readLine();
-       System.out.println("You entered: " + input);
-       // command = sc.nextLine().charAt(0);
-       // System.out.println("\nYou put: " + command);
+      while( command != 'x'){
+       
+        System.out.print("Enter Data: ");
+        input = reader.read();
+        command = (char)input;
+        System.out.println("\nYou entered: " + command);
      }//end While loop
     }//end try
-    catch(Exception e) {
+    catch(IOException e) {
       System.out.println(e);
       System.out.println("You faggot! How hard is it to hit the right button?");
     }
+    
     display(cube);
   }
 
-  //Rotating the sides of the cube forwards or backwards.
+//Mehtod that displays the cube when called. takes a 3d array as a varriable.
  public static void display(char temp[][][]){
   for (int i = 0; i < 6; i++){
     //height
@@ -84,6 +82,6 @@ public class Cube {
   }
  }
 
- //public static void 
+
 
 }
