@@ -49,39 +49,94 @@ public class Cube {
     //Setting up the input from the user
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     char command = ' ';
-    int input;
+    
+
     try {
-      while( command != 'x'){
-       
+      String input;
+      
+      while( command != 'x' & command != 'X'){
+        
+        display(cube);
         System.out.print("Enter Data: ");
-        input = reader.read();
-        command = (char)input;
+        input = reader.readLine();
+        //***another While loop here for if the string is full of more commands. right now I will only take the first command.
+
+
+        command = input.charAt(0);
+        switch(command){
+          case 'u':
+          case 'U':
+           cube = uMove(cube);
+           break;
+        }
         System.out.println("\nYou entered: " + command);
      }//end While loop
+     System.out.print("Program Terminated.\n");
     }//end try
     catch(IOException e) {
       System.out.println(e);
       System.out.println("You faggot! How hard is it to hit the right button?");
     }
+    catch(StringIndexOutOfBoundsException e){
+      System.out.println("You Retard! put in an actual command.");
+      //***Put in some sort of loop back so the code continues on even if this error happens.
+    }
     
-    display(cube);
+    
   }
 
 //Mehtod that displays the cube when called. takes a 3d array as a varriable.
- public static void display(char temp[][][]){
-  for (int i = 0; i < 6; i++){
-    //height
-    for (int x = 0; x < 3; x++){
-      //width
-      for (int y = 0; y < 3; y++){
-        System.out.print(temp[i][x][y] + " ");
+  public static void display(char temp[][][]){
+    //Faces
+    for (int i = 0; i < 6; i++){
+      //height
+      for (int x = 0; x < 3; x++){
+        //width
+        for (int y = 0; y < 3; y++){
+          System.out.print(temp[i][x][y] + " ");
+        }
+        System.out.println();
       }
       System.out.println();
     }
-    System.out.println();
   }
- }
+// I want to change the way display works. can I call a function from inside the same function? 
+//I could have display display faces and simply call it multiple times. 
+//***Add in a way to track which moves are happening so that we can reverse it later
 
 
+//**(Priority #1)** //This guy just needs to be copied for each of the next five moves. 
+  public static char[][][] uMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[0][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[0][0][x] = temp[4][0][x];
+      temp[4][0][x] = temp[2][0][x];
+      temp[2][0][x] = temp[5][0][x];
+      temp[5][0][x] = rowTemp[x];
+    }//end forLoop
+    return temp;
+  }//End 
 
+  public static char[][][] dMove(char temp[][][]){
+    return temp;
+  }//End
+
+  public static char[][][] rMove(char temp[][][]){
+    return temp;
+  }//End
+
+  public static char[][][] lMove(char temp[][][]){
+    return temp;
+  }//End
+
+  public static char[][][] fMove(char temp[][][]){
+    return temp;
+  }//End
+
+  public static char[][][] bMove(char temp[][][]){
+    return temp;
+  }//End
 }
