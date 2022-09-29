@@ -68,6 +68,26 @@ public class Cube {
           case 'U':
            cube = uMove(cube);
            break;
+          case 'd':
+          case 'D':
+            cube = dMove(cube);
+            break;
+          case 'r':
+          case 'R':
+            cube = rMove(cube);
+            break;
+          case 'l':
+          case 'L':
+            cube = lMove(cube);
+            break;
+          case 'f':
+          case 'F':
+            cube = fMove(cube);
+            break;
+          case 'b':
+          case 'B':
+            cube = bMove(cube);
+            break;
         }
         System.out.println("\nYou entered: " + command);
      }//end While loop
@@ -106,6 +126,8 @@ public class Cube {
 
 
 //**(Priority #1)** //This guy just needs to be copied for each of the next five moves. 
+//The command work but they all only rotate along one axis. fix the rotation so that the cube moves.
+//U move
   public static char[][][] uMove(char temp[][][]){
     char rowTemp[] = new char[3];
     for(int i=0; i<3; i++){
@@ -120,23 +142,78 @@ public class Cube {
     return temp;
   }//End 
 
+//D Move
   public static char[][][] dMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[0][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[0][0][x] = temp[5][0][x];
+      temp[5][0][x] = temp[2][0][x];
+      temp[2][0][x] = temp[4][0][x];
+      temp[4][0][x] = rowTemp[x];
+    }//End forLoop
     return temp;
   }//End
 
+//R Move
   public static char[][][] rMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[0][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[0][0][x] = temp[1][0][x];
+      temp[1][0][x] = temp[2][0][x];
+      temp[2][0][x] = temp[3][0][x];
+      temp[3][0][x] = rowTemp[x];
+    }//End forLoop
     return temp;
   }//End
 
+//L Move
   public static char[][][] lMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[0][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[0][0][x] = temp[3][0][x];
+      temp[3][0][x] = temp[2][0][x];
+      temp[2][0][x] = temp[1][0][x];
+      temp[1][0][x] = rowTemp[x];
+    }//End forLoop
     return temp;
   }//End
 
+//F Move
   public static char[][][] fMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[3][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[3][0][x] = temp[5][0][x];
+      temp[5][0][x] = temp[1][0][x];
+      temp[1][0][x] = temp[4][0][x];
+      temp[4][0][x] = rowTemp[x];
+    }//End forLoop
     return temp;
   }//End
 
+//B Move
   public static char[][][] bMove(char temp[][][]){
+    char rowTemp[] = new char[3];
+    for(int i=0; i<3; i++){
+      rowTemp[i] = temp[3][0][i];
+    }//End forLoop
+    for(int x=0; x<3; x++){
+      temp[3][0][x] = temp[4][0][x];
+      temp[4][0][x] = temp[1][0][x];
+      temp[1][0][x] = temp[5][0][x];
+      temp[5][0][x] = rowTemp[x];
+    }//End forLoop
     return temp;
   }//End
 }
