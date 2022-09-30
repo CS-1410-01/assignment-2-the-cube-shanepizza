@@ -89,7 +89,7 @@ public class Cube {
             cube = bMove(cube);
             break;
         }
-        System.out.println("\nYou entered: " + command);
+//System.out.println("\nYou entered: " + command);
      }//end While loop
      System.out.print("Program Terminated.\n");
     }//end try
@@ -127,6 +127,7 @@ public class Cube {
 
 //**(Priority #1)** //This guy just needs to be copied for each of the next five moves. 
 //The command work but they all only rotate along one axis. fix the rotation so that the cube moves.
+
 //U move
   public static char[][][] uMove(char temp[][][]){
     char rowTemp[] = new char[3];
@@ -145,14 +146,14 @@ public class Cube {
 //D Move
   public static char[][][] dMove(char temp[][][]){
     char rowTemp[] = new char[3];
-    for(int i=0; i<3; i++){
+    for(int i=2; i>-1; i--){
       rowTemp[i] = temp[0][0][i];
     }//End forLoop
-    for(int x=0; x<3; x++){
-      temp[0][0][x] = temp[5][0][x];
-      temp[5][0][x] = temp[2][0][x];
-      temp[2][0][x] = temp[4][0][x];
-      temp[4][0][x] = rowTemp[x];
+    for(int x=2; x>-1; x--){
+      temp[0][2][x] = temp[5][2][x];
+      temp[5][2][x] = temp[2][2][x];
+      temp[2][2][x] = temp[4][2][x];
+      temp[4][2][x] = rowTemp[x];
     }//End forLoop
     return temp;
   }//End
@@ -161,13 +162,13 @@ public class Cube {
   public static char[][][] rMove(char temp[][][]){
     char rowTemp[] = new char[3];
     for(int i=0; i<3; i++){
-      rowTemp[i] = temp[0][0][i];
+      rowTemp[i] = temp[0][i][2];
     }//End forLoop
     for(int x=0; x<3; x++){
-      temp[0][0][x] = temp[1][0][x];
-      temp[1][0][x] = temp[2][0][x];
-      temp[2][0][x] = temp[3][0][x];
-      temp[3][0][x] = rowTemp[x];
+      temp[0][x][2] = temp[1][x][2];
+      temp[1][x][2] = temp[2][x][2];
+      temp[2][x][2] = temp[3][x][2];
+      temp[3][x][2] = rowTemp[x];
     }//End forLoop
     return temp;
   }//End
@@ -176,13 +177,13 @@ public class Cube {
   public static char[][][] lMove(char temp[][][]){
     char rowTemp[] = new char[3];
     for(int i=0; i<3; i++){
-      rowTemp[i] = temp[0][0][i];
+      rowTemp[i] = temp[0][i][2];
     }//End forLoop
     for(int x=0; x<3; x++){
-      temp[0][0][x] = temp[3][0][x];
-      temp[3][0][x] = temp[2][0][x];
-      temp[2][0][x] = temp[1][0][x];
-      temp[1][0][x] = rowTemp[x];
+      temp[0][x][0] = temp[3][x][0];
+      temp[3][x][0] = temp[2][x][0];
+      temp[2][x][0] = temp[1][x][0];
+      temp[1][x][0] = rowTemp[x];
     }//End forLoop
     return temp;
   }//End
