@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+//View ReadMe for info on commands
+
+
 /*  Steps until project is finished.
  * 1) Next step will be to add in all the prime moves and to fix reverseSolve so that it know how to recognize prime moves
  * I am going to cheat on the primes and simply have them use the normal moves three times but only log one move for the commandList
