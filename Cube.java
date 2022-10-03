@@ -186,25 +186,33 @@ public static void display(char temp[][][]){
     tempCube[faceToRotate][1][2] = temp;
     return tempCube;
   }
+
 //Reversing all moves
   public static void reverseSolve(char temp[][][], String commands){
     String tempSolve ="";
     String tempChar = "";
-    tempSolve = commands.substring(commands.length());
-    for(int i = commands.length(); i>0;i--){
-      if(commands.substring(i-2, i).contains("?'")){
-        tempChar = commands.substring(i-2, i);
-        System.out.println("Move#" + i " We are adding a prime move");
-      }else{
-        tempChar = commands.substring(i-1, i);
-        System.out.println("Move#" + i " We are adding a normal move");
+    try {
+      tempSolve = commands.substring(commands.length());
+      for(int i = commands.length(); i>0;--i){
+        if(commands.substring(i-2, i).contains("?'")){
+          tempChar = commands.substring(i-2, i);
+          System.out.println("Move#" + i + " We are adding a prime move");
+        }else{
+          tempChar = commands.substring(i-1, i);
+          System.out.println("Move#" + i  + " We are adding a normal move");
+        }
+        tempChar = returnOposite(tempChar);
+        tempSolve = tempSolve.concat(tempChar);
+        System.out.println("Current list of commands: " + tempSolve );
       }
-      tempChar = returnOposite(tempChar);
-      tempSolve = tempSolve.concat(tempChar);
+      tempSolve = tempSolve.concat("x");
+    } catch(Exception e){
+      System.out.println(e);
+      System.out.println("We are getting stuck in the reverseSolve");
     }
-    tempSolve = tempSolve.concat("x");
     run(temp, tempSolve);
   }
+
 //run the main code
   public static void run(char cube[][][], String commands){
     String commandList = "";
@@ -214,19 +222,22 @@ public static void display(char temp[][][]){
     while( !input.matches("x") & !input.matches("X")){
       display(cube);
 
-      try {
-        
+      try { 
         if(commands.length() < 1){
         System.out.print("Enter Data: ");
         input = reader.readLine();
-        //display(cube);
         }else{
-          input = commands.substring(0, 1);
-          commands = commands.substring(1);
+          if(commands.substring(0, 2).contains("'") == true){
+            input = commands.substring(0,2);
+            commands = commands.substring(2);
+          }else{
+            input = commands.substring(0, 1);
+            commands = commands.substring(1);
+          }
           System.out.println("____________________");
-        }
+        }//End if else
 
-        //Check for which command has been called 
+      //Check for which command has been called 
         switch(input){
           case "u'":
           case "U'":
@@ -304,13 +315,14 @@ public static void display(char temp[][][]){
           case "x":
           case "X":
             break;
-          case "Solve":
-          case "solve":
+          case "S":
+          case "s":
             System.out.println(commandList);
             reverseSolve(cube, commandList);
             break;
           default :
-            System.out.println("That is not a real command! Try again");
+          System.out.println(input);  
+          System.out.println("That is not a real command! Try again");
             break;
         }
     }//end try
@@ -325,7 +337,6 @@ public static void display(char temp[][][]){
    }//end While loop
    //display(cube);
    System.out.println("While loop ended");
-   
   }//End Run Function
 
 //Retrun opposite of a given command
