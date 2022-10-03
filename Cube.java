@@ -191,19 +191,22 @@ public static void display(char temp[][][]){
   public static void reverseSolve(char temp[][][], String commands){
     String tempSolve ="";
     String tempChar = "";
+    String primecheck = "";
     try {
       tempSolve = commands.substring(commands.length());
-      for(int i = commands.length(); i>0;--i){
-        if(commands.substring(i-2, i).contains("?'")){
-          tempChar = commands.substring(i-2, i);
-          System.out.println("Move#" + i + " We are adding a prime move");
-        }else{
-          tempChar = commands.substring(i-1, i);
-          System.out.println("Move#" + i  + " We are adding a normal move");
-        }
+      System.out.println("We are taking the last command given which is: " + tempSolve);
+
+      for(int i = commands.length(); i>0;i--){
+            tempChar = commands.substring(i-1, i);
+          
+          if(tempChar.contains("'") == true){
+            tempChar = commands.substring(i-2, i);
+          }
+          
+        //System.out.println("Move#" + i  + " We are adding a normal move");
         tempChar = returnOposite(tempChar);
         tempSolve = tempSolve.concat(tempChar);
-        System.out.println("Current list of commands: " + tempSolve );
+        //System.out.println("Current list of commands: " + tempSolve );
       }
       tempSolve = tempSolve.concat("x");
     } catch(Exception e){
@@ -281,7 +284,6 @@ public static void display(char temp[][][]){
             cube = bMove(cube);
             cube = bMove(cube);
             break;
-
           case "u":
           case "U":
             commandList = commandList.concat(input);
@@ -394,7 +396,7 @@ public static void display(char temp[][][]){
       case "X":
         break;
       default :
-        i = " ";
+        i = "x";
         break;
     }//End Switch
     return i;
