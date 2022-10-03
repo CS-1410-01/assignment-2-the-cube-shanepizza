@@ -44,6 +44,7 @@ public class Cube {
         }
       }
     }
+    
     String command = "";
     run(cube, command);
     System.out.println("Program Terminated.\n");
@@ -158,6 +159,7 @@ public class Cube {
     faceRotation(temp, 2);
     return temp;
   }//End
+
 /*
  * Next step will be to add in all the prime moves and to fix reverseSolve so that it know how to recognize prime moves
  * I am going to cheat on the primes and simply have them use the normal moves three times but only log one move for the commandList
@@ -220,6 +222,49 @@ public class Cube {
 
         //Check for which command has been called 
         switch(input){
+          case "u'":
+          case "U'":
+            commandList = commandList.concat(input);
+            cube = uMove(cube);
+            cube = uMove(cube);
+            cube = uMove(cube);
+            break;
+          case "d'":
+          case "D'":
+            commandList = commandList.concat(input);
+            cube = dMove(cube);
+            cube = dMove(cube);
+            cube = dMove(cube);
+            break;
+          case "r'":
+          case "R'":
+            commandList = commandList.concat(input);
+            cube = rMove(cube);
+            cube = rMove(cube);
+            cube = rMove(cube);
+            break;
+          case "l'":
+          case "L'":
+            commandList = commandList.concat(input);
+            cube = lMove(cube);
+            cube = lMove(cube);
+            cube = lMove(cube);
+            break;
+          case "f'":
+          case "F'":
+            commandList = commandList.concat(input);
+            cube = fMove(cube);
+            cube = fMove(cube);
+            cube = fMove(cube);
+            break;
+          case "b'":
+          case "B'":
+            commandList = commandList.concat(input);
+            cube = bMove(cube);
+            cube = bMove(cube);
+            cube = bMove(cube);
+            break;
+
           case "u":
           case "U":
             commandList = commandList.concat(input);
