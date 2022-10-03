@@ -1,3 +1,7 @@
+# Dev Addition:
+I have not added in a menu for what command to use. The list would clutter the interface too much. the commands are simple and should be memorized. 
+commands are (u, d, r, l, f, b) or (u', d', r', l', f', b'). "X" will exit the program while "solve" will begin the solving process for the current state of the cube.
+
 # The CUBE: multidimensional array assignment
 
 ### My recommendations
