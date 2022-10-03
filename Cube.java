@@ -2,8 +2,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+/*  Steps until project is finished.
+ * 1) Next step will be to add in all the prime moves and to fix reverseSolve so that it know how to recognize prime moves
+ * I am going to cheat on the primes and simply have them use the normal moves three times but only log one move for the commandList
+ * 
+ * 2) second step will be to figure out how to identify paterns (possibly states achieved from different moves) and to shorten those paterns 
+ * (i.e. D,D,D is the same as D')
+ * probably use "indexOf()" with wildcards inside to find patterns of 3. Wild cards will not help in identifying the pattern.
+ * 
+ * 3) lastly, I will add in an args check to feed moves to the while loop. 
+ */
 public class Cube {  
-
   public static void main(final String[] args){
     //This cube is a three dimensional array. it is of data type char but that might change later.
     //Maybe I need to declare the cube outside of main so that it is global? 
@@ -44,14 +53,17 @@ public class Cube {
         }
       }
     }
-    
     String command = "";
     run(cube, command);
     System.out.println("Program Terminated.\n");
   }// End Main
 
-//Mehtod that displays the cube when called. takes a 3d array as a varriable.
-  public static void display(char temp[][][]){
+
+/* Mehtod that displays the cube when called. takes a 3d array as a varriable.
+ * I could have theoretically done this with less lines of code by recursively calling a simple display function that displays one face at a time. 
+ * It makes no difference for this project but could allow for more control of future renditions. 
+*/ 
+public static void display(char temp[][][]){
     //Faces
     for (int i = 0; i < 6; i++){
       //height
@@ -65,9 +77,6 @@ public class Cube {
       System.out.println();
     }
   }
-// I want to change the way display works. can I call a function from inside the same function? 
-//I could have display display faces and simply call it multiple times. 
-//***Add in a way to track which moves are happening so that we can reverse it later
 
 //U move
   public static char[][][] uMove(char temp[][][]){
@@ -160,18 +169,6 @@ public class Cube {
     return temp;
   }//End
 
-/*
- * Next step will be to add in all the prime moves and to fix reverseSolve so that it know how to recognize prime moves
- * I am going to cheat on the primes and simply have them use the normal moves three times but only log one move for the commandList
- * 
- * second step will be to figure out how to identify paterns (possibly states achieved from different moves) and to shorten those paterns 
- * (i.e. D,D,D is the same as D')
- * probably use "indexOf()" with wildcards inside to find patterns of 3. Wild cards will not help in identifying the pattern.
- * 
- * lastly, I will add in an args check to feed moves to the while loop. 
- */
-
-
 //Rotate faces function
   public static char[][][] faceRotation(char tempCube[][][], int faceToRotate){
     char temp = tempCube[faceToRotate][0][0];
@@ -189,14 +186,18 @@ public class Cube {
 //Reversing all moves
   public static void reverseSolve(char temp[][][], String commands){
     String tempSolve ="";
+    String tempChar = "";
     tempSolve = commands.substring(commands.length());
-//System.out.println(tempSolve + "1");
     for(int i = commands.length(); i>0 ;i--){
-      tempSolve = tempSolve.concat(commands.substring(i-1, i));
-//System.out.println(tempSolve + "2");
+      if(commands.substring(i-2, i).contains("?'")){
+        tempChar = commands.substring(i-2, i);
+      }else{
+        tempChar = commands.substring(i-1, i);
+      }
+      tempChar = returnOposite(tempChar);
+      tempSolve = tempSolve.concat(tempChar);
     }
     tempSolve = tempSolve.concat("x");
-//System.out.println(tempSolve + "3");
     run(temp, tempSolve);
   }
 //run the main code
@@ -313,12 +314,73 @@ public class Cube {
       System.out.println("You faggot! How hard is it to hit the right button?");
     }
     catch(StringIndexOutOfBoundsException e){
-      System.out.println("You Retard! put in an actual command.");
+      System.out.println(e);
     }//end catch
    }//end While loop
    //display(cube);
    System.out.println("While loop ended");
    
   }//End Run Function
+
+//Retrun opposite of a given command
+  public static String returnOposite(String i){
+    switch(i){
+      case "u'":
+      case "U'":
+        i = "u";
+        break;
+      case "d'":
+      case "D'":
+        i = "d";
+        break;
+      case "r'":
+      case "R'":
+        i = "r";
+        break;
+      case "l'":
+      case "L'":
+        i = "l";
+        break;
+      case "f'":
+      case "F'":
+        i = "f";
+        break;
+      case "b'":
+      case "B'":
+        i = "b";
+        break;
+      case "u":
+      case "U":
+        i = "u'";
+        break;
+      case "d":
+      case "D":
+        i = "d'";
+        break;
+      case "r":
+      case "R":
+        i = "r'";
+        break;
+      case "l":
+      case "L":
+        i = "l'";
+        break;
+      case "f":
+      case "F":
+        i = "f'";
+        break;
+      case "b":
+      case "B":
+        i = "b'";
+        break;
+      case "x":
+      case "X":
+        break;
+      default :
+        i = " ";
+        break;
+    }//End Switch
+    return i;
+  }//End returnOpposite Function
 
 }//End Class
