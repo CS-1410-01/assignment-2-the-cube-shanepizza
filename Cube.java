@@ -191,11 +191,13 @@ public static void display(char temp[][][]){
     String tempSolve ="";
     String tempChar = "";
     tempSolve = commands.substring(commands.length());
-    for(int i = commands.length(); i>0 ;i--){
+    for(int i = commands.length(); i>0;i--){
       if(commands.substring(i-2, i).contains("?'")){
         tempChar = commands.substring(i-2, i);
+        System.out.println("Move#" + i " We are adding a prime move");
       }else{
         tempChar = commands.substring(i-1, i);
+        System.out.println("Move#" + i " We are adding a normal move");
       }
       tempChar = returnOposite(tempChar);
       tempSolve = tempSolve.concat(tempChar);
@@ -318,6 +320,7 @@ public static void display(char temp[][][]){
     }
     catch(StringIndexOutOfBoundsException e){
       System.out.println(e);
+      System.out.println("This Error is being called from the \"Try\" block in the run function.");
     }//end catch
    }//end While loop
    //display(cube);
