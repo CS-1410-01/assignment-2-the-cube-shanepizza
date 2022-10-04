@@ -262,10 +262,6 @@ public static void display(char temp[][][]){
         input = "x";
         commands = "x";
       }//End catch
-      
-      if(input == " "){
-        input = "x";
-      }//End if
     //Check for which command has been called
       switch(input){
         case "u'":
