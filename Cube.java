@@ -51,19 +51,18 @@ public class Cube {
       }
     }
     String command = "";
-    
+    Boolean argu = true;
     if(args.length > 0){
+      argu = false;
       for(int i =0; i < args.length; i++){
         command = command.concat(args[i]);
-
+        
       }//End forLoop
     }//End if
-    run(cube, command);
+    run(cube, command, argu);
     System.out.println("Program Terminated.\n");
   }// End Main
-
-
-/* Mehtod that displays the cube when called. takes a 3d array as a varriable.
+/* Method that displays the cube when called. takes a 3d array as a varriable.
  * I could have theoretically done this with less lines of code by recursively calling a simple display function that displays one face at a time. 
  * It makes no difference for this project but could allow for more control of future renditions. 
 */ 
@@ -195,13 +194,12 @@ public static void display(char temp[][][]){
   }
 
 //Reversing all moves
-  public static void reverseSolve(char temp[][][], String commands){
+  public static void reverseSolve(char temp[][][], String commands, boolean run){
     String tempSolve ="";
     String tempChar = "";
     String primecheck = "";
     try {
       tempSolve = commands.substring(commands.length());
-      System.out.println("We are taking the last command given which is: " + tempSolve);
       for(int i = commands.length(); i>0;i--){
             tempChar = commands.substring(i-1, i);
           if(tempChar.contains("'") == true){
@@ -210,23 +208,29 @@ public static void display(char temp[][][]){
         tempChar = returnOposite(tempChar);
         tempSolve = tempSolve.concat(tempChar);
       }//End forLoop
-      tempSolve = tempSolve.concat("x");
     } catch(Exception e){
       System.out.println(e);
       System.out.println("We are getting stuck in the reverseSolve");
     }
-    System.out.println("\n" + "The Stuff:" + tempSolve + ":");
-    run(temp, tempSolve);
+    if(run == true){
+      tempSolve = tempSolve.concat("x");
+      run(temp, tempSolve, true);
+    }else{
+      System.out.println(tempSolve);
+    }
+    
   }//End reverseSolve
 
 //run the main code
-  public static void run(char cube[][][], String commands){
+  public static void run(char cube[][][], String commands, boolean display){
     String commandList = "";
     String input = "";
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     while( !input.matches("x") & !input.matches("X")){
-      display(cube);
+      if(display == true){
+        display(cube);
+      }
       try { 
         if(commands.length() < 1){
         System.out.print("Enter Data: ");
@@ -247,8 +251,8 @@ public static void display(char temp[][][]){
           catch(IndexOutOfBoundsException e) {
             input = commands.substring(0);
             commands = "";
+            display = true;
           }//End Catch
-          
           System.out.println("____________________\n");
         }//End if else
       }//end try
@@ -346,13 +350,15 @@ public static void display(char temp[][][]){
         case "S":
         case "s":
           System.out.println(commandList);
-          reverseSolve(cube, commandList);
+          reverseSolve(cube, commandList, true);
           break;
         default :
           System.out.println(input);  
           System.out.println("An inccorect command was used. Please use: \t(u, d, l, r, f, or b)\n\t\t(u', d', l', r', f', or b') \n Type \"S\" to solve and \"x\" to exit.");
           break;
       }//End Switch
+     
+      reverseSolve(cube, commandList, false);
     }//end While loop   
   }//End Run Function
 
