@@ -258,7 +258,7 @@ public static void display(char temp[][][]){
       }//end try
       catch(IOException e) {
         System.out.println(e);
-        System.out.println("You faggot! How hard is it to hit the right button?");
+        System.out.println("You maggot! How hard is it to hit the right button?");
       }//End Catch
       catch(StringIndexOutOfBoundsException e){
         System.out.println(e);
